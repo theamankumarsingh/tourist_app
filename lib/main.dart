@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_app/Screens/emergency_screen.dart';
+import 'package:tourist_app/Screens/home_screen.dart';
 import 'package:tourist_app/Screens/login_screen.dart';
 
 void main() {
@@ -38,9 +40,10 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       themeMode: _themeMode,
-      home: Login(),
+      home: home(),
     );
   }
+
   void changeTheme(ThemeMode themeMode) {
     setState(() {
       _themeMode = themeMode;
