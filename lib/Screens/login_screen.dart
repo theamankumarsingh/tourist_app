@@ -1,9 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tourist_app/Screens/dashboard.dart';
+
+import 'package:page_transition/page_transition.dart';
 
 class Login extends StatefulWidget {
-  var photos = ['Assets/Traveling-rafiki.png','Assets/Ahmedabad-rafiki.png','Assets/Agra-rafiki.png','Assets/Tour guide-rafiki.png'];
+  var photos = [
+    'Assets/Traveling-rafiki.png',
+    'Assets/Ahmedabad-rafiki.png',
+    'Assets/Agra-rafiki.png',
+    'Assets/Tour guide-rafiki.png'
+  ];
 
   Login({Key? key}) : super(key: key);
 
@@ -15,7 +23,7 @@ class _LoginState extends State<Login> {
   FocusNode focusEmail = FocusNode();
   FocusNode focusPass = FocusNode();
 
-  int _image=0;
+  int _image = 0;
   var _timer;
 
   @override
@@ -35,22 +43,24 @@ class _LoginState extends State<Login> {
       statusBarIconBrightness: Brightness.light,
     ));
     return GestureDetector(
-      onTap: (){FocusManager.instance.primaryFocus?.unfocus(); setState(() {
-      });},
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        setState(() {});
+      },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: SafeArea(
             child: Container(
-              margin: const EdgeInsets.only(left:45, right: 45, top:30, bottom: 30),
+              margin: const EdgeInsets.only(
+                  left: 45, right: 45, top: 30, bottom: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FractionallySizedBox(
-                    alignment: Alignment.topCenter,
-                    widthFactor: 0.85,
-                    child:slideshow()
-                  ),
+                      alignment: Alignment.topCenter,
+                      widthFactor: 0.85,
+                      child: slideshow()),
                   Container(
                     alignment: Alignment.center,
                     child: const Text(
@@ -81,8 +91,9 @@ class _LoginState extends State<Login> {
                   ),
                   Container(
                     child: TextField(
-                      onTap: (){setState(() {
-                      });},
+                      onTap: () {
+                        setState(() {});
+                      },
                       focusNode: focusEmail,
                       keyboardType: TextInputType.visiblePassword,
                       textInputAction: TextInputAction.done,
@@ -94,17 +105,18 @@ class _LoginState extends State<Login> {
                         filled: true,
                         fillColor: Colors.grey.shade100,
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            )
-                        ),
+                          color: Theme.of(context).primaryColor,
+                        )),
                         prefixIcon: Icon(
                           Icons.alternate_email,
-                          color: focusEmail.hasFocus ? Theme.of(context).primaryColor : Colors.grey.shade400,
+                          color: focusEmail.hasFocus
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey.shade400,
                         ),
                         hintText: 'Email',
                       ),
@@ -115,8 +127,9 @@ class _LoginState extends State<Login> {
                   ),
                   Container(
                     child: TextField(
-                      onTap: (){setState(() {
-                      });},
+                      onTap: () {
+                        setState(() {});
+                      },
                       focusNode: focusPass,
                       keyboardType: TextInputType.visiblePassword,
                       textInputAction: TextInputAction.done,
@@ -134,18 +147,20 @@ class _LoginState extends State<Login> {
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            )
-                        ),
+                          color: Theme.of(context).primaryColor,
+                        )),
                         prefixIcon: Icon(
                           Icons.lock_outline,
-                          color: focusPass.hasFocus ? Theme.of(context).primaryColor : Colors.grey.shade400,
+                          color: focusPass.hasFocus
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey.shade400,
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
                             Icons.help,
                             color: Theme.of(context).primaryColor,
-                          ), onPressed: () {  },
+                          ),
+                          onPressed: () {},
                         ),
                         hintText: 'Password',
                       ),
@@ -156,18 +171,30 @@ class _LoginState extends State<Login> {
                   ),
                   Container(
                     width: double.infinity,
-                    child: ElevatedButton(onPressed: (){},
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            duration: Duration(milliseconds: 600),
+                            child: Dashboard(),
+                          ),
+                        );
+                      },
                       child: const Text('Login'),
                       style: ButtonStyle(
                           elevation: MaterialStateProperty.all(0),
-                          backgroundColor: MaterialStateProperty.all(const Color(0xff0165ff)),
-                          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              )
-                          )
-                      ),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xff0165ff)),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                  horizontal: 50, vertical: 20)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ))),
                     ),
                   ),
                   const SizedBox(
@@ -178,47 +205,49 @@ class _LoginState extends State<Login> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [ Text('New User?',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey.shade600,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),  TextButton(
-                      onPressed: () {  },
-                      child: const Text('Register',
+                    children: [
+                      Text(
+                        'New User?',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Color(0xff0165ff),
-                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
-                    ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xff0165ff),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-          )
-      ),
+          )),
     );
   }
 
   //fix
-  Widget slideshow()
-  {
-    var prev=_image-1;
-    if(_image==0) {
+  Widget slideshow() {
+    var prev = _image - 1;
+    if (_image == 0) {
       prev = 3;
     }
-    print("$_image $prev");
-    setState(() {
-
-    });
-    return Stack(children: [AnimatedOpacity(opacity: 0,
-        duration: const Duration(milliseconds: 1000),
-        child: Image.asset(widget.photos[prev])),
-      AnimatedOpacity(opacity: 1,
+    setState(() {});
+    return Stack(children: [
+      AnimatedOpacity(
+          opacity: 0,
+          duration: const Duration(milliseconds: 1000),
+          child: Image.asset(widget.photos[prev])),
+      AnimatedOpacity(
+          opacity: 1,
           duration: const Duration(milliseconds: 1000),
           child: Image.asset(widget.photos[_image]))
     ]);
