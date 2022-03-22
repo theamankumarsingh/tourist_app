@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_app/Screens/dashboard.dart';
 import 'package:tourist_app/Screens/emergency_screen.dart';
-import 'package:tourist_app/Screens/home_screen.dart';
 import 'package:tourist_app/Screens/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +26,10 @@ class _MyAppState extends State<MyApp> {
       title: 'Kavach',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context)
+              .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
+        ),
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.blue,
         ).copyWith(
@@ -41,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       themeMode: _themeMode,
-      home: home(),
+      home: Dashboard(),
     );
   }
 

@@ -16,6 +16,7 @@ class _emergencyState extends State<emergency> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Emergency Contacts"),
+        backgroundColor: Colors.pinkAccent,
       ),
       body: ListView(children: [
         list_item("Aashray", '9804403207'),

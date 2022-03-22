@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:tourist_app/Screens/emergency_screen.dart';
 import 'package:tourist_app/Screens/feed.dart';
 
 class Dashboard extends StatefulWidget {
@@ -15,7 +16,11 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.pinkAccent,
+        centerTitle: true,
+        title: Text(
+          "KAVACH",
+        ),
       ),
       body: Column(children: [
         Padding(
@@ -50,11 +55,12 @@ class _DashboardState extends State<Dashboard> {
                     PageTransition(
                       type: PageTransitionType.bottomToTop,
                       duration: Duration(milliseconds: 600),
-                      child: Dashboard(),
+                      child: emergency(),
                     ),
                   );
                 },
-                child: getCard("Emergency Contact", Icons.phone_android_rounded)),
+                child:
+                    getCard("Emergency Contact", Icons.phone_android_rounded)),
           ],
         ),
         Row(
@@ -72,7 +78,8 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   );
                 },
-                child: getCard("What's poppin'?", Icons.question_answer_rounded))
+                child:
+                    getCard("What's poppin'?", Icons.question_answer_rounded))
           ],
         )
       ]),
