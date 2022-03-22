@@ -240,7 +240,6 @@ class _LoginState extends State<Login> {
     if (_image == 0) {
       prev = 3;
     }
-    print("$_image $prev");
     setState(() {});
     return Stack(children: [
       AnimatedOpacity(

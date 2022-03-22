@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:tourist_app/Screens/feed.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -9,14 +11,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 222, 237, 238),
       appBar: AppBar(
         backgroundColor: Colors.white,
       ),
@@ -25,22 +22,57 @@ class _DashboardState extends State<Dashboard> {
           padding: const EdgeInsets.all(16.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            
-            child: Image.asset("Assets/map.png"),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Image.asset("Assets/map.png"),
+            ),
           ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getCard("File an FIR", Icons.edit),
-            getCard("Emergency Contact", Icons.call),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.bottomToTop,
+                      duration: Duration(milliseconds: 600),
+                      child: Dashboard(),
+                    ),
+                  );
+                },
+                child: getCard("File an FIR", Icons.edit_note_rounded)),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.bottomToTop,
+                      duration: Duration(milliseconds: 600),
+                      child: Dashboard(),
+                    ),
+                  );
+                },
+                child: getCard("Emergency Contact", Icons.phone_android_rounded)),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getCard("Compare Prices", Icons.monetization_on),
-            getCard("What's poppin'?", Icons.question_answer)
+            getCard("Compare Prices", Icons.monetization_on_rounded),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.bottomToTop,
+                      duration: Duration(milliseconds: 600),
+                      child: Feed(),
+                    ),
+                  );
+                },
+                child: getCard("What's poppin'?", Icons.question_answer_rounded))
           ],
         )
       ]),
@@ -57,19 +89,21 @@ class _DashboardState extends State<Dashboard> {
           child: Container(
               decoration: BoxDecoration(
                   border: Border.all(
-                    color: Color(0xFFE4E4E4),
+                    color: Color.fromARGB(255, 192, 226, 255),
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5))),
               height: 120,
               width: 120,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2.0),
                     child: Icon(
                       icon,
-                      size: 50,
+                      color: Colors.blue,
+                      size: 40,
                     ),
                   ),
                   Center(
@@ -77,7 +111,7 @@ class _DashboardState extends State<Dashboard> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         label,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
                   )
