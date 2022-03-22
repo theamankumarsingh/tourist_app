@@ -20,6 +20,7 @@ class _DashboardState extends State<Dashboard> {
         centerTitle: true,
         title: Text(
           "KAVACH",
+          style: TextStyle(),
         ),
       ),
       body: Column(children: [

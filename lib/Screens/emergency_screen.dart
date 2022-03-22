@@ -26,10 +26,10 @@ class _emergencyState extends State<emergency> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              CupertinoIcons.doc_checkmark,
+              CupertinoIcons.camera,
               color: Colors.red,
             ),
-            label: 'FIR',
+            label: 'Go Live',
           ),
           BottomNavigationBarItem(
               icon: Icon(
