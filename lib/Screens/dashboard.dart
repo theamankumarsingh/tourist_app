@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:tourist_app/Screens/emergency_screen.dart';
 import 'package:tourist_app/Screens/feed.dart';
 
 class Dashboard extends StatefulWidget {
@@ -122,7 +122,16 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        duration: Duration(milliseconds: 600),
+                        child: Emergency(),
+                      ),
+                    );
+                  },
                   child: FeaturesTile(
                     icon: Icon(
                       Icons.phone_android_rounded,
