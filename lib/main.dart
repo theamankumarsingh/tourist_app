@@ -16,7 +16,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ThemeMode _themeMode = ThemeMode.system;
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

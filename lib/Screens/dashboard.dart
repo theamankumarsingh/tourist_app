@@ -14,109 +14,174 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
-      body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Image.asset("Assets/map.png"),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Image.asset(
+                  "Assets/map.png",
+                  height: 350,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                ),
+                Container(
+                  height: 350,
+                  color: Colors.black12,
+                  padding: EdgeInsets.only(top: 50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 24,
+                          right: 24,
+                        ),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30))),
+                        height: 50,
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.bottomToTop,
-                      duration: Duration(milliseconds: 600),
-                      child: Dashboard(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: FeaturesTile(
+                    icon: Icon(
+                      Icons.edit_note_rounded,
+                      size: 100.0,
+                      color: Color(0xff5A6C64),
                     ),
-                  );
-                },
-                child: getCard("File an FIR", Icons.edit_note_rounded)),
-            GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.bottomToTop,
-                      duration: Duration(milliseconds: 600),
-                      child: Dashboard(),
+                    label: "File an FIR",
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: FeaturesTile(
+                    icon: Icon(Icons.monetization_on_rounded,
+                        size: 100.0, color: Color(0xff5A6C64)),
+                    label: "Compare Prices",
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 18,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        duration: Duration(milliseconds: 600),
+                        child: Feed(),
+                      ),
+                    );
+                  },
+                  child: FeaturesTile(
+                    icon: Icon(Icons.question_answer_rounded,
+                        size: 100.0, color: Color(0xff5A6C64)),
+                    label: "What's poppin'?",
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: FeaturesTile(
+                    icon: Icon(
+                      Icons.phone_android_rounded,
+                      size: 100.0,
+                      color: Colors.red,
                     ),
-                  );
-                },
-                child: getCard("Emergency Contact", Icons.phone_android_rounded)),
+                    label: "Emergency Contact",
+                  ),
+                )
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ),
+            ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            getCard("Compare Prices", Icons.monetization_on_rounded),
-            GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.bottomToTop,
-                      duration: Duration(milliseconds: 600),
-                      child: Feed(),
-                    ),
-                  );
-                },
-                child: getCard("What's poppin'?", Icons.question_answer_rounded))
-          ],
-        )
-      ]),
+      ),
     );
   }
+}
 
-  Widget getCard(String label, IconData icon) {
-    return Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: 16.0,
-          horizontal: 24.0,
-        ),
-        child: Card(
-          child: Container(
+class FeaturesTile extends StatelessWidget {
+  final Icon icon;
+  final String label;
+  FeaturesTile({required this.label, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: 0.7,
+      child: Container(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 192, 226, 255),
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              height: 120,
-              width: 120,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    child: Icon(
-                      icon,
-                      color: Colors.blue,
-                      size: 40,
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        label,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  )
-                ],
-              )),
-        ));
+                  border: Border.all(color: Color(0xff5A6C64).withOpacity(0.5)),
+                  borderRadius: BorderRadius.circular(40)),
+              child: icon,
+            ),
+            SizedBox(
+              height: 9,
+            ),
+            Container(
+                width: 70,
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff5A6C64)),
+                ))
+          ],
+        ),
+      ),
+    );
   }
 }

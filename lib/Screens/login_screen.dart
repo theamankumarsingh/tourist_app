@@ -178,6 +178,7 @@ class _LoginState extends State<Login> {
                           PageTransition(
                             type: PageTransitionType.bottomToTop,
                             duration: Duration(milliseconds: 600),
+                            //child: Dashboard(),
                             child: Dashboard(),
                           ),
                         );
