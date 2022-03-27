@@ -109,7 +109,7 @@ class _DashboardState extends State<Dashboard> {
                     Navigator.push(
                       context,
                       PageTransition(
-                        type: PageTransitionType.bottomToTop,
+                        type: PageTransitionType.rightToLeft,
                         duration: Duration(milliseconds: 600),
                         child: Feed(),
                       ),
@@ -143,11 +143,33 @@ class _DashboardState extends State<Dashboard> {
                 )
               ],
             ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              ),
+            SizedBox(
+              height: 18,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        duration: Duration(milliseconds: 600),
+                        child: Emergency(),
+                      ),
+                    );
+                  },
+                  child: FeaturesTile(
+                    icon: Icon(
+                      Icons.health_and_safety_rounded,
+                      size: 100.0,
+                      color: Colors.red,
+                    ),
+                    label: "Health Hazards",
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -184,7 +206,7 @@ class FeaturesTile extends StatelessWidget {
                   label,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: Color(0xff5A6C64)),
                 ))
