@@ -48,23 +48,21 @@ class _FeedState extends State<Feed> {
         body: ListView.builder(
           itemBuilder: (BuildContext context, index) {
             return Card(
-              child: ListTile(
-                leading: CircleAvatar(
-                    backgroundImage: AssetImage(posts[index].image)),
-                trailing: const Icon(Icons.arrow_right_rounded),
-                title: Text(posts[index].heading),
-                subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      posts[index].content.length > 60
-                          ? Text(posts[index].content.substring(0, 60) + "...")
-                          : Text(posts[index].content),
-                      Text(
-                        "\nPosted by ${posts[index].author} at ${posts[index].time}",
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ]),
-              ),
+              child: ExpansionTile(
+                  leading: CircleAvatar(
+                      backgroundImage: AssetImage(posts[index].image)),
+                  title: Text(posts[index].heading),
+                  children: [
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(posts[index].content),
+                          Text(
+                            "\nPosted by ${posts[index].author} at ${posts[index].time}",
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                        ]),
+                  ]),
             );
           },
           itemCount: posts.length,

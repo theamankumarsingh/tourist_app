@@ -12,16 +12,27 @@ class Emergency extends StatefulWidget {
 class _EmergencyState extends State<Emergency> {
   @override
   Widget build(BuildContext context) {
+    List<Contact> contacts = [
+      Contact(
+        'Aman',
+        '9805441275',
+        const NetworkImage(
+          'https://w7.pngwing.com/pngs/770/378/png-transparent-user-profile-icon-contact-information-s-face-head-avatar.png',
+        ),
+      ),
+      Contact("Aashray", '9804403207', const AssetImage('Assets/avatar.png')),
+      Contact(
+          "Chaithanya",
+          "0123456789",
+          const NetworkImage(
+              'https://w7.pngwing.com/pngs/770/378/png-transparent-user-profile-icon-contact-information-s-face-head-avatar.png'))
+    ];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Emergency Contacts"),
-        backgroundColor: Colors.pinkAccent,
       ),
-      body: ListView(children: [
-        list_item("Aashray", '9804403207'),
-        list_item('Aman', '9805441275')
-      ]),
+      body: ListView(children: contacts),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -43,41 +54,44 @@ class _EmergencyState extends State<Emergency> {
   }
 }
 
-class list_item extends StatelessWidget {
-  String name = "";
-  String number = "";
-  list_item(String name, String number) {
-    this.name = name;
-    this.number = number;
-  }
+class Contact extends StatelessWidget {
+  String name, number;
+  ImageProvider? image;
+
+  //constructor
+  Contact(this.name, this.number, this.image);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          ListTile(
-            leading: const CircleAvatar(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.grey, width: 1),
+                borderRadius: BorderRadius.circular(5)),
+            leading: CircleAvatar(
+              radius: 25,
               backgroundColor: Colors.white,
-              backgroundImage: AssetImage('Assets/avatar.png'),
+              backgroundImage: image,
             ),
             title: Text(
-              this.name,
+              name,
             ),
-            subtitle: Text(this.number),
-            trailing: ElevatedButton(
+            subtitle: Text(number),
+            trailing: IconButton(
               onPressed: () async {
-                await FlutterPhoneDirectCaller.callNumber(this.number);
+                await FlutterPhoneDirectCaller.callNumber(number);
               },
-              child: Icon(CupertinoIcons.phone),
+              icon: const Icon(
+                CupertinoIcons.phone_fill,
+                color: Colors.green,
+              ),
             ),
           ),
-          const Divider(
-            height: 1.0,
-            indent: 1.0,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
