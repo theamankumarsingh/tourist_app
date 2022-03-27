@@ -39,6 +39,10 @@ class _emergencyState extends State<emergency> {
               label: 'Emergency Message')
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(CupertinoIcons.add_circled_solid),
+        onPressed: () {},
+      ),
     );
   }
 }
