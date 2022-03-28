@@ -3,6 +3,7 @@ import 'package:tourist_app/Screens/dashboard.dart';
 import 'package:tourist_app/Screens/emergency_screen.dart';
 import 'package:tourist_app/Screens/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,8 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
     return MaterialApp(
       title: 'Kavach',
       debugShowCheckedModeBanner: false,
