@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_sms/flutter_sms.dart';
+import 'package:location/location.dart';
 
 class Emergency extends StatefulWidget {
   const Emergency({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class _EmergencyState extends State<Emergency> {
     List<Contact> contacts = [
       Contact(
         'Aman',
-        '9805441275',
+        '9023456781',
         const NetworkImage(
           'https://w7.pngwing.com/pngs/770/378/png-transparent-user-profile-icon-contact-information-s-face-head-avatar.png',
         ),
@@ -34,7 +36,7 @@ class _EmergencyState extends State<Emergency> {
       ),
       body: ListView(children: contacts),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.camera,
@@ -80,14 +82,58 @@ class Contact extends StatelessWidget {
               name,
             ),
             subtitle: Text(number),
-            trailing: IconButton(
-              onPressed: () async {
-                await FlutterPhoneDirectCaller.callNumber(number);
-              },
-              icon: const Icon(
-                CupertinoIcons.phone_fill,
-                color: Colors.green,
-              ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    Location location = new Location();
+
+                    bool _serviceEnabled;
+                    PermissionStatus _permissionGranted;
+                    LocationData _locationData;
+
+                    _serviceEnabled = await location.serviceEnabled();
+                    if (!_serviceEnabled) {
+                      _serviceEnabled = await location.requestService();
+                      if (!_serviceEnabled) {
+                        return;
+                      }
+                    }
+
+                    _permissionGranted = await location.hasPermission();
+                    if (_permissionGranted == PermissionStatus.denied) {
+                      _permissionGranted = await location.requestPermission();
+                      if (_permissionGranted != PermissionStatus.granted) {
+                        return;
+                      }
+                    }
+
+                    _locationData = await location.getLocation();
+                    print("send msg");
+                    LocationData ldata = await location.getLocation();
+                    await sendSMS(
+                        message:
+                            "Help!!!\nI'm at ${ldata.latitude} latitude, ${ldata.longitude} longitude\nSee here: \nhttps://www.google.com/maps/search/?api=1&query=${ldata.latitude},${ldata.longitude}",
+                        recipients: [number]);
+                    print("sent msg");
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.chat_bubble_fill,
+                    color: Colors.grey,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await FlutterPhoneDirectCaller.callNumber(number);
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.phone_fill,
+                    color: Colors.green,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
