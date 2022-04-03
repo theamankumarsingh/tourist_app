@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:tourist_app/Screens/dashboard.dart';
 
 import 'package:page_transition/page_transition.dart';
+import 'package:tourist_app/theme.dart';
 
 class Login extends StatefulWidget {
   var photos = [
@@ -49,14 +51,30 @@ class _LoginState extends State<Login> {
       },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
           body: SafeArea(
             child: Container(
               margin: const EdgeInsets.only(
-                  left: 45, right: 45, top: 30, bottom: 30),
+                  left: 40, right: 40, top: 10, bottom: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 232, top: 0, bottom: 0, right: 0),
+                    child: Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              ThemeProvider themeProvider =
+                                  Provider.of<ThemeProvider>(context,
+                                      listen: false);
+                              themeProvider.swapTheme();
+                            },
+                            icon: Icon(Icons.brightness_6)),
+                      ],
+                    ),
+                  ),
                   FractionallySizedBox(
                       alignment: Alignment.topCenter,
                       widthFactor: 0.85,
@@ -199,11 +217,11 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 5,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

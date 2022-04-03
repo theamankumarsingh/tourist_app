@@ -16,23 +16,19 @@ class _EmergencyState extends State<Emergency> {
   Widget build(BuildContext context) {
     List<Contact> contacts = [
       Contact(
-        'Aman',
-        '9023456781',
-        const NetworkImage(
-          'https://w7.pngwing.com/pngs/770/378/png-transparent-user-profile-icon-contact-information-s-face-head-avatar.png',
-        ),
-      ),
+          'Aman', '9023456781', const AssetImage('Assets/Contact_avatar.png')),
       Contact("Aashray", '9804403207', const AssetImage('Assets/avatar.png')),
-      Contact(
-          "Chaithanya",
-          "0123456789",
-          const NetworkImage(
-              'https://w7.pngwing.com/pngs/770/378/png-transparent-user-profile-icon-contact-information-s-face-head-avatar.png'))
+      Contact("Chaithanya", "0123456789",
+          const AssetImage('Assets/Contact_avatar.png'))
     ];
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xff0165ff),
         centerTitle: true,
-        title: const Text("Emergency Contacts"),
+        title: const Text(
+          "Emergency Contacts",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: ListView(children: contacts),
       bottomNavigationBar: BottomNavigationBar(

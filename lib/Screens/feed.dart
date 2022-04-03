@@ -29,7 +29,10 @@ class _FeedState extends State<Feed> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          leading: IconButton(
+              onPressed: (){}, icon: Icon(Icons.arrow_back)),
+          //backgroundColor: Colors.black,
+          backgroundColor: Color(0xff0165ff),
           automaticallyImplyLeading: false,
           actions: [
             Padding(
@@ -40,6 +43,7 @@ class _FeedState extends State<Feed> {
               ),
             )
           ],
+          centerTitle: true,
           title: const Text(
             "Live updates around you",
             style: TextStyle(color: Colors.white),
