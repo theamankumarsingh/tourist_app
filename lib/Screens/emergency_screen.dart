@@ -21,34 +21,7 @@ class _EmergencyState extends State<Emergency> {
       Contact("Chaithanya", "0123456789",
           const AssetImage('Assets/Contact_avatar.png'))
     ];
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff0165ff),
-        centerTitle: true,
-        title: const Text(
-          "Emergency Contacts",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: ListView(children: contacts),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              CupertinoIcons.camera,
-              color: Colors.red,
-            ),
-            label: 'Go Live',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.text_bubble,
-                color: Colors.blue,
-              ),
-              label: 'Emergency Message')
-        ],
-      ),
-    );
+    return ListView(children: contacts);
   }
 }
 
